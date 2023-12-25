@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
     clock_t end_time = clock();
     double total_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
-    printf("\nRender time time: %f seconds\n", total_time);
+    printf("\nRender time: %f seconds\n", total_time);
 
     return result;
 }
