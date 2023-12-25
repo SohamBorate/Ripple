@@ -11,6 +11,8 @@ This program uses the `GCC` compiler with `Make`
 
 ```
 > make ripple
+gcc -o ripple ripple.c vec3.c sphere.c bmp.c
+
 ```
 
 ## Usage
@@ -19,6 +21,13 @@ Run the programming specifying the height and width.
 
 ```
 > ripple 1024 1024
+Sphere (0x5d5ffbe0) (0.000000 0.000000 10.000000) (4.000000)
+
+Width: 1024, Height: 1024
+Sun position: Vector3 (0x5d5ffb30) (0.000000 -10.000000 0.000000) (10.000000)
+
+Render time time: 0.366000 seconds
+
 ```
 
 You should see an `output.bmp` file
