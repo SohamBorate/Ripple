@@ -7,7 +7,7 @@ complex objects with varying geometry and aesthetic lighting.
 
 ## Building
 
-This program uses the `GCC` compiler with `Make`
+This program uses the `GCC` compiler with `Make` on `Windows 11 x64-based operating system`
 
 ```
 > make ripple
