@@ -1,2 +1,2 @@
-ripple:
-	gcc -o ripple ripple.c vec3.c sphere.c bmp.c
+ripplewindow:
+	gcc -o ripplewindow RippleWindow.c vec3.c sphere.c BmpWindow.c -mwindows

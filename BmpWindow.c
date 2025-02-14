@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "bmp.h"
+#include "BmpWindow.h"
 
-int write_bmp(const char *filename, const int width, const int height, RGB pixels[height][width]) {
+int write_bmp(const char filename[20], const int width, const int height, RGB_window pixels[height][width]) {
+    printf("BMP Name: %s\n", filename);
     FILE *file = fopen(filename, "wb"); // Open the BMP file in binary write mode
 
     if (file == NULL) {return 4;}
@@ -27,7 +28,7 @@ int write_bmp(const char *filename, const int width, const int height, RGB pixel
     header.colorsUsed = 0;
     header.colorsImportant = 0;
 
-    const int padding = (4 - (header.width * sizeof(RGB)) % 4) % 4;
+    const int padding = (4 - (header.width * sizeof(RGB_window)) % 4) % 4;
 
     // Write BMP header
     fwrite(&header, sizeof(header), 1, file);
@@ -36,7 +37,7 @@ int write_bmp(const char *filename, const int width, const int height, RGB pixel
     for (int i = 0; i < header.height; i++)
     {
         // Write row to outfile
-        fwrite(pixels[i], sizeof(RGB), header.width, file);
+        fwrite(pixels[i], sizeof(RGB_window), header.width, file);
 
         // Write padding at end of row
         for (int k = 0; k < padding; k++)

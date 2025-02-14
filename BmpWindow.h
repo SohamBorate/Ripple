@@ -26,8 +26,8 @@ typedef struct
     uint8_t  green;
     uint8_t  red;
 } __attribute__((__packed__))
-RGB;
+RGB_window;
 
-int write_bmp(const char *filename, const int width, const int height, RGB pixels[height][width]);
+int write_bmp(const char filename[20], const int width, const int height, RGB_window pixels[height][width]);
 
 uint8_t validate_rgb(int n);
