@@ -84,8 +84,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
                 return 0;
 
             case WM_TIMER:
-                sun_index += (2.0 * PI) * (16 / 1000.0);
-                vec3 *sun2 = vec3_new(10.0 * cos(sun_index), 0.0, 10.0 * sin(sun_index));
+                sun_index += (2.0 * PI) * (16.0 / 1000.0);
+                vec3 *sun2 = vec3_new(10.0 * cos(sun_index), 5.0 * sin(sun_index * 3.0), 10.0 * sin(sun_index));
                 // vec3_print(sun2);
                 // printf("%d\n", sun_index);
                 if (sun_index > (2.0 * PI)) {
