@@ -51,12 +51,3 @@ int write_bmp(const char *filename, const int WIDTH, const int HEIGHT, RGB *pixe
 
     return 0;
 }
-
-uint8_t validate_rgb(int n) {
-    if (n < 0) {
-        return 0;
-    } else if (n > 255) {
-        return 255;
-    }
-    return n;
-}

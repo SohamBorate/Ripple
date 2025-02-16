@@ -29,5 +29,3 @@ typedef struct
 RGB;
 
 int write_bmp(const char *filename, const int width, const int height, RGB *pixels);
-
-uint8_t validate_rgb(int n);

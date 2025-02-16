@@ -1,6 +1,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdint.h>
 
 #include "render.h"
 
@@ -92,4 +93,13 @@ RGB render_pixel(vec3 *origin, vec3 *sun, sphere *ball, const int ROW, const int
     vec3_free(hit_pos_to_sun);
 
     return pixel;
+}
+
+uint8_t validate_rgb(int n) {
+    if (n < 0) {
+        return 0;
+    } else if (n > 255) {
+        return 255;
+    }
+    return n;
 }
