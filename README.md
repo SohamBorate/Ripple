@@ -1,5 +1,7 @@
 ```
-This branch is for using GPU acceleration with CUDA
+This branch is used to create an animation by
+rendering multiple frames
+using GPU acceleration with CUDA
 Only works for NVIDIA GPU
 ```
 

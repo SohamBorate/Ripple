@@ -93,15 +93,15 @@ extern "C" void render_scene_CUDA(vec3 origin_cpu, vec3 sun_cpu, sphere ball_cpu
     cudaMalloc((void**)&pixels_gpu, HEIGHT * WIDTH * sizeof(RGB));
     cudaMemcpy(pixels_gpu, pixels_cpu, HEIGHT * WIDTH * sizeof(RGB), cudaMemcpyHostToDevice);
 
-    printf("\nReporting from the GPU\n\n");
+    // printf("\nReporting from the GPU\n\n");
 
-    sphere_print(ball_gpu);
-    printf("Sun position: ");
-    vec3_print(sun_gpu);
-    printf("\nWidth: %i, Height: %i\n", WIDTH, HEIGHT);
-    printf("Light Intensity: %i\n", LIGHT_INTENSITY);
-    printf("Field Of View: %i\n", FIELD_OF_VIEW);
-    printf("Shading Enabled: %i\n", SHADE);
+    // sphere_print(ball_gpu);
+    // printf("Sun position: ");
+    // vec3_print(sun_gpu);
+    // printf("\nWidth: %i, Height: %i\n", WIDTH, HEIGHT);
+    // printf("Light Intensity: %i\n", LIGHT_INTENSITY);
+    // printf("Field Of View: %i\n", FIELD_OF_VIEW);
+    // printf("Shading Enabled: %i\n", SHADE);
 
     // 256 threads per block
     dim3 threadsPerBlock(16, 16);

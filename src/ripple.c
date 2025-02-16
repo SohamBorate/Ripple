@@ -6,6 +6,14 @@
 #include "config.h"
 #include "sphere.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+#define FPS 120
+#define SPEED (2.0 / 3.0) * M_PI // radians per second
+#define LENGTH 10 // seconds
+
 extern void render_scene_CUDA(vec3 origin, vec3 sun, sphere ball, int HEIGHT, int WIDTH, RGB *pixels);
 
 int main(int argc, char **argv) {
@@ -39,9 +47,6 @@ int main(int argc, char **argv) {
 
     sphere_print(ball);
 
-    // total time taken
-    clock_t start_time = clock();
-
     vec3 origin = vec3_new(0.0,0.0,0.0);
     // if (origin == NULL) {
     //     sphere_free(ball);
@@ -74,12 +79,38 @@ int main(int argc, char **argv) {
 
     printf("Light Intensity: %i\n", LIGHT_INTENSITY);
     printf("Field Of View: %i\n", FIELD_OF_VIEW);
-    printf("Shading Enabled: %i\n", SHADE);
+    printf("Shading Enabled: %i\n\n", SHADE);
 
-    render_scene_CUDA(origin, sun_pos, ball, HEIGHT, WIDTH, pixels);
+    // total time taken
+    clock_t start_time = clock();
 
-    // Write to BMP file
-    STATUS = write_bmp("output.bmp", WIDTH, HEIGHT, pixels);
+    float angle = 0.0;
+    int done = 0;
+
+    for (int i = 0; i < FPS * LENGTH; i++) {
+        // frame number i
+        char name[100];
+        sprintf(name, "frames\\output%04d.bmp", i);
+        
+        sun_pos.x = 17.5 * cos(angle);
+        sun_pos.y = 1.0 * sin(angle * 4.0);
+        sun_pos.z = 10.0 + 15.0 * sin(angle);
+
+        render_scene_CUDA(origin, sun_pos, ball, HEIGHT, WIDTH, pixels);
+
+        STATUS = write_bmp(name, WIDTH, HEIGHT, pixels);
+
+        angle += (1.0 / FPS) * SPEED;
+
+        if (angle >= 2 * M_PI) {
+            angle -= 2 * M_PI;
+        }
+
+        done++;
+        if (done % FPS == 0) {
+            printf("Frames rendered: %i / %i\n", done, FPS * LENGTH);
+        }
+    }
 
     // clean up
     free(pixels);
