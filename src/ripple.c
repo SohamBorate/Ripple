@@ -3,7 +3,10 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "render.h"
+#include "config.h"
+#include "sphere.h"
+
+extern void render_scene_CUDA(vec3 origin, vec3 sun, sphere ball, int HEIGHT, int WIDTH, RGB *pixels);
 
 int main(int argc, char **argv) {
     int STATUS = 0;
@@ -17,56 +20,54 @@ int main(int argc, char **argv) {
     const int WIDTH = atoi(argv[1]);
     const int HEIGHT = atoi(argv[2]);
 
-    vec3 *ball_pos = vec3_new(0.0,0.0,10.0);
-    if (ball_pos == NULL) {
-        STATUS = 3;
-        return STATUS;
-    }
+    vec3 ball_pos = vec3_new(0.0,0.0,10.0);
+    // if (ball_pos == NULL) {
+    //     STATUS = 3;
+    //     return STATUS;
+    // }
 
     RGB color;
     color.red = 112;
     color.green = 1;
     color.blue = 185;
-    sphere *ball = sphere_new(ball_pos, 4.0, color);
-    if (ball == NULL) {
-        STATUS = 4;
-        vec3_free(ball_pos);
-        return STATUS;
-    }
+    sphere ball = sphere_new(ball_pos, 4.0, color);
+    // if (ball == NULL) {
+    //     STATUS = 4;
+    //     vec3_free(ball_pos);
+    //     return STATUS;
+    // }
 
     sphere_print(ball);
 
     // total time taken
     clock_t start_time = clock();
 
-    vec3 *origin = vec3_new(0.0,0.0,0.0);
-    if (origin == NULL) {
-        sphere_free(ball);
-        STATUS = 5;
-        return STATUS;
-    }
+    vec3 origin = vec3_new(0.0,0.0,0.0);
+    // if (origin == NULL) {
+    //     sphere_free(ball);
+    //     STATUS = 5;
+    //     return STATUS;
+    // }
 
-    vec3 *sun_pos = vec3_new(0.0, 10.0,0.0);
-    if (origin == NULL) {
-        sphere_free(ball);
-        vec3_free(origin);
-        STATUS = 6;
-        return STATUS;
-    }
+    vec3 sun_pos = vec3_new(0.0, 10.0,0.0);
+    // if (origin == NULL) {
+    //     sphere_free(ball);
+    //     vec3_free(origin);
+    //     STATUS = 6;
+    //     return STATUS;
+    // }
     printf("Sun position: ");
     vec3_print(sun_pos);
 
     printf("\nWidth: %i, Height: %i\n", WIDTH, HEIGHT);
 
     // dynamic memory allocation for 2D array
-    RGB (*pixels)[WIDTH] = calloc(HEIGHT, WIDTH * sizeof(RGB));
+    RGB *pixels = malloc(HEIGHT * WIDTH * sizeof(RGB));
     // IMPORTANT !!!
-    // pixels[row][column]
+    // pixels[row + column]
 
     if (pixels == NULL) {
         printf("Memory allocation for Pixels failed\n");
-        sphere_free(ball);
-        vec3_free(origin);
         STATUS = 7;
         return STATUS;
     }
@@ -75,16 +76,13 @@ int main(int argc, char **argv) {
     printf("Field Of View: %i\n", FIELD_OF_VIEW);
     printf("Shading Enabled: %i\n", SHADE);
 
-    render_scene(origin, sun_pos, ball, HEIGHT, WIDTH, pixels);
+    render_scene_CUDA(origin, sun_pos, ball, HEIGHT, WIDTH, pixels);
 
     // Write to BMP file
     STATUS = write_bmp("output.bmp", WIDTH, HEIGHT, pixels);
 
     // clean up
     free(pixels);
-    vec3_free(origin);
-    vec3_free(sun_pos);
-    sphere_free(ball);
 
     // render time
     clock_t end_time = clock();

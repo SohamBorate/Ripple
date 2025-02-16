@@ -3,7 +3,7 @@
 #include <string.h>
 #include "bmp.h"
 
-int write_bmp(const char *filename, const int WIDTH, const int HEIGHT, RGB pixels[HEIGHT][WIDTH]) {
+int write_bmp(const char *filename, const int WIDTH, const int HEIGHT, RGB *pixels) {
     FILE *file = fopen(filename, "wb"); // Open the BMP file in binary write mode
 
     if (file == NULL) {
@@ -36,10 +36,9 @@ int write_bmp(const char *filename, const int WIDTH, const int HEIGHT, RGB pixel
     fwrite(&header, sizeof(header), 1, file);
 
     // Write new pixels to outfile
-    for (int i = header.height - 1; i > -1; i--)
-    {
+    for (int i = HEIGHT - 1; i >= 0; i--) {
         // Write row to outfile
-        fwrite(pixels[i], sizeof(RGB), header.width, file);
+        fwrite(pixels + i * WIDTH, sizeof(RGB), WIDTH, file);
 
         // Write padding at end of row
         for (int k = 0; k < padding; k++)
@@ -51,13 +50,4 @@ int write_bmp(const char *filename, const int WIDTH, const int HEIGHT, RGB pixel
     fclose(file);
 
     return 0;
-}
-
-uint8_t validate_rgb(int n) {
-    if (n < 0) {
-        return 0;
-    } else if (n > 255) {
-        return 255;
-    }
-    return n;
 }
