@@ -12,6 +12,8 @@ void vec3_free(vec3 *v);
 
 float vec3_magnitude(vec3 *v);
 
+vec3 *vec3_unit(vec3 *v);
+
 vec3* vec3_sum(vec3 *v1, vec3 *v2);
 
 vec3* vec3_difference(vec3 *v1, vec3 *v2);

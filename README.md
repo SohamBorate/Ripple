@@ -11,7 +11,7 @@ This program uses the `GCC` compiler with `Make` on `Windows 11 x64-based operat
 
 ```
 > make ripple
-gcc -o ripple ripple.c vec3.c sphere.c bmp.c
+gcc -o ripple ripple.c vec3.c sphere.c bmp.c render.c
 
 ```
 
@@ -20,13 +20,23 @@ gcc -o ripple ripple.c vec3.c sphere.c bmp.c
 Run the program specifying the height and width.
 
 ```
-> ripple 1024 1024
-Sphere (0x5d5ffbe0) (0.000000 0.000000 10.000000) (4.000000)
+> ripple 3840 2160
+Sphere:
+        Memory Address: 000001888ffb7340
+        Position: (0.000000 0.000000 10.000000)
+        Radius: 4.000000
+        Color: RGB (112, 1, 185)
+Sun position: Vector3:
+        Memory Address: 000001888ffb73e0
+        Value: (0.000000 10.000000 0.000000)
+        Magnitude: 10.000000
 
-Width: 1024, Height: 1024
-Sun position: Vector3 (0x5d5ffb30) (0.000000 -10.000000 0.000000) (10.000000)
+Width: 3840, Height: 2160
+Light Intensity: 3000
+Field Of View: 70
+Shading Enabled: 1
 
-Render time: 0.366000 seconds
+Render time: 42.058000 seconds
 
 ```
 

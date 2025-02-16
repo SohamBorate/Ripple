@@ -3,25 +3,28 @@
 #include <string.h>
 #include "bmp.h"
 
-int write_bmp(const char *filename, const int width, const int height, RGB pixels[height][width]) {
+int write_bmp(const char *filename, const int WIDTH, const int HEIGHT, RGB pixels[HEIGHT][WIDTH]) {
     FILE *file = fopen(filename, "wb"); // Open the BMP file in binary write mode
 
-    if (file == NULL) {return 4;}
+    if (file == NULL) {
+        printf("Memory allocation for Bitmap failed\n");
+        return 8;
+    }
 
     // BMP header setup
     BMPHeader header;
     header.signature = 0x4D42;
-    header.fileSize = sizeof(BMPHeader) + width * height * 3; // 3 bytes per pixel (24-bit)
+    header.fileSize = sizeof(BMPHeader) + WIDTH * HEIGHT * 3; // 3 bytes per pixel (24-bit)
     header.reserved1 = 0;
     header.reserved2 = 0;
     header.offset = sizeof(BMPHeader);
     header.headerSize = 40;
-    header.width = width;
-    header.height = height;
+    header.width = WIDTH;
+    header.height = HEIGHT;
     header.planes = 1;
     header.bitsPerPixel = 24;
     header.compression = 0;
-    header.imageSize = width * height * 3;
+    header.imageSize = WIDTH * HEIGHT * 3;
     header.xPixelsPerMeter = 0;
     header.yPixelsPerMeter = 0;
     header.colorsUsed = 0;
@@ -33,7 +36,7 @@ int write_bmp(const char *filename, const int width, const int height, RGB pixel
     fwrite(&header, sizeof(header), 1, file);
 
     // Write new pixels to outfile
-    for (int i = 0; i < header.height; i++)
+    for (int i = header.height - 1; i > -1; i--)
     {
         // Write row to outfile
         fwrite(pixels[i], sizeof(RGB), header.width, file);

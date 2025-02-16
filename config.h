@@ -1,0 +1,3 @@
+#define LIGHT_INTENSITY 3000
+#define FIELD_OF_VIEW 70
+#define SHADE 1

@@ -5,13 +5,16 @@
 #include "vec3.h"
 
 void vec3_print(vec3 *v) {
-    printf("Vector3 (0x%x) (%f %f %f) (%f)\n", &v, v->x, v->y, v->z, vec3_magnitude(v));
+    printf("Vector3:\n\tMemory Address: %p\n\tValue: (%f %f %f)\n\tMagnitude: %f\n", (void *)v, v->x, v->y, v->z, vec3_magnitude(v));
     return;
 }
 
 vec3* vec3_new(float x, float y, float z) {
     vec3 *vector = malloc(sizeof(vec3));
-    if (vector == NULL) return NULL;
+    if (vector == NULL) {
+        printf("Memory allocation for Vector3 failed\n");
+        return NULL;
+    }
     vector->x = x;
     vector->y = y;
     vector->z = z;
@@ -26,6 +29,14 @@ void vec3_free(vec3 *v) {
 float vec3_magnitude(vec3 *v) {
     float mag = sqrt((v->x * v->x) + (v->y * v->y) + (v->z * v->z));
     return mag;
+}
+
+vec3 *vec3_unit(vec3 *v) {
+    float magnitude = vec3_magnitude(v);
+    float x = v->x / magnitude;
+    float y = v->y / magnitude;
+    float z = v->z / magnitude;
+    return vec3_new(x, y, z);
 }
 
 vec3* vec3_sum(vec3 *v1, vec3 *v2) {
