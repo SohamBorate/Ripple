@@ -1,3 +1,8 @@
+```
+This branch is for using GPU acceleration with CUDA
+Only works for NVIDIA GPU
+```
+
 # Ripple
 
 Ripple is a raytracer made completely from scratch in the C programming language.
