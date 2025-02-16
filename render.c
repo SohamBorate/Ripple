@@ -4,13 +4,13 @@
 
 #include "render.h"
 
-void render_scene(vec3 *origin, vec3 *sun, sphere *ball, int HEIGHT, int WIDTH, RGB pixels[HEIGHT][WIDTH]) {
+void render_scene(vec3 *origin, vec3 *sun, sphere *ball, int HEIGHT, int WIDTH, RGB *pixels) {
     for (int row = 0; row < HEIGHT; row++) {
         for (int column = 0; column < WIDTH; column++) {
             RGB pixel = render_pixel(origin, sun, ball, row, column, HEIGHT, WIDTH);
-            pixels[row][column].blue = pixel.blue;
-            pixels[row][column].green = pixel.green;
-            pixels[row][column].red = pixel.red;
+            pixels[row * WIDTH + column].blue = pixel.blue;
+            pixels[row * WIDTH + column].green = pixel.green;
+            pixels[row * WIDTH + column].red = pixel.red;
         }
     }
 }

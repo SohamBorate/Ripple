@@ -58,10 +58,11 @@ int main(int argc, char **argv) {
 
     printf("\nWidth: %i, Height: %i\n", WIDTH, HEIGHT);
 
-    // dynamic memory allocation for 2D array
-    RGB (*pixels)[WIDTH] = calloc(HEIGHT, WIDTH * sizeof(RGB));
+    // dynamic memory allocation for 1D array
+    RGB *pixels = malloc(HEIGHT * WIDTH * sizeof(RGB));
     // IMPORTANT !!!
-    // pixels[row][column]
+    // pixels[row + column]
+    // IMPORTANT !!!
 
     if (pixels == NULL) {
         printf("Memory allocation for Pixels failed\n");

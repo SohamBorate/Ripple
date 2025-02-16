@@ -28,6 +28,6 @@ typedef struct
 } __attribute__((__packed__))
 RGB;
 
-int write_bmp(const char *filename, const int width, const int height, RGB pixels[height][width]);
+int write_bmp(const char *filename, const int width, const int height, RGB *pixels);
 
 uint8_t validate_rgb(int n);
