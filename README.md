@@ -99,21 +99,38 @@ Run the program specifying the width and height.
 ```
 > build\ripple.exe 3840 2160
 Sphere:
-        Memory Address: 00000024F3EFFB50
-        Position: (0.000000 0.000000 10.000000)
+        Memory Address: 0000002F260FFAE0
+        Position: (0.000000 0.000000 20.000000)
         Radius: 4.000000
         Color: RGB (112, 1, 185)
+Sphere:
+        Memory Address: 0000002F260FFAE0
+        Position: (3.000000 0.000000 12.000000)
+        Radius: 1.000000
+        Color: RGB (1, 112, 185)
+Sphere:
+        Memory Address: 0000002F260FFAE0
+        Position: (-15.000000 -2.000000 20.000000)
+        Radius: 10.000000
+        Color: RGB (146, 112, 185)
 Sun position: Vector3:
-        Memory Address: 00000024F3EFFBB0
-        Value: (0.000000 10.000000 0.000000)
+        Memory Address: 0000002F260FFB50
+        Value: (10.000000 0.000000 0.000000)
         Magnitude: 10.000000
 
 Width: 3840, Height: 2160
-Light Intensity: 3000
+Light Intensity: 6000
 Field Of View: 70
 Shading Enabled: 1
 
-Render time: 1.366000 seconds
+Aspect Ratio: 1.777778
+Horizontal Field Of View in radians: 1.221730
+Vertical Field Of View in radians: 0.687223
+Scene Width: 1.400415 Scene Height: 0.715611
+Least Scene Width: 0.000365 Least Scene Height: 0.000331
+
+
+Render time: 4.070000 seconds
 
 ```
 

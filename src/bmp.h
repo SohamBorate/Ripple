@@ -1,3 +1,6 @@
+#ifndef BMP_H
+#define BMP_H
+
 #include <stdint.h>
 
 #pragma pack(push, 1)
@@ -31,3 +34,5 @@ typedef struct
 #pragma pack(pop)
 
 int write_bmp(const char *filename, const int width, const int height, RGB *pixels);
+
+#endif

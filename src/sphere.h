@@ -1,5 +1,8 @@
-#include "vec3.h"
+#ifndef SPHERE_H
+#define SPHERE_H
+
 #include "bmp.h"
+#include "vec3.h"
 
 typedef struct {
     vec3 position;
@@ -10,3 +13,5 @@ typedef struct {
 void sphere_print(sphere s);
 
 sphere sphere_new(vec3 position, float radius, RGB color);
+
+#endif

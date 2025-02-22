@@ -1,3 +1,6 @@
+#ifndef VEC3_H
+#define VEC3_H
+
 typedef struct {
     float x;
     float y;
@@ -25,3 +28,5 @@ float vec3_dot_scalar(vec3 v, float s);
 float vec3_dot_vec3(vec3 v1, vec3 v2);
 
 vec3 vec3_cross_vec3(vec3 v1, vec3 v2);
+
+#endif
