@@ -5,6 +5,10 @@
 
 #include "render.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 void render_scene(vec3 origin, vec3 sun, sphere ball, int HEIGHT, int WIDTH, RGB *pixels) {
     for (int row = 0; row < HEIGHT; row++) {
         for (int column = 0; column < WIDTH; column++) {
@@ -31,7 +35,7 @@ RGB render_pixel(vec3 origin, vec3 sun, sphere ball, const int ROW, const int CO
     // physical position of the pixel in the scene
     vec3 scene_pixel = vec3_new(0.1 * ( ( ((float) WIDTH) / 2.0 ) - 0.5 - ( 1.0 * ((float) COLUMN) ) ),
                                 0.1 * ( ( ((float) HEIGHT) / 2.0 ) - 0.5 - ( 1.0 * ((float) ROW) ) ),
-                                121 - FIELD_OF_VIEW
+                                121.0 - (float)FIELD_OF_VIEW
                             );
 
     vec3 temp_direction = vec3_difference(scene_pixel, origin);
@@ -43,7 +47,7 @@ RGB render_pixel(vec3 origin, vec3 sun, sphere ball, const int ROW, const int CO
 
     // perpendicular distance
     float cos_theta = vec3_dot_vec3(d_vec3, direction) / d_mag;
-    const float perp_dist = sqrt(pow(d_mag, 2) * (1 - pow(cos_theta, 2)));
+    const float perp_dist = (float)sqrt(pow(d_mag, 2) * (1 - pow(cos_theta, 2)));
 
     if (perp_dist > ball.radius) {
         return pixel;
@@ -56,15 +60,15 @@ RGB render_pixel(vec3 origin, vec3 sun, sphere ball, const int ROW, const int CO
         return pixel;
     }
 
-    const float hit_pos_dist = d_mag * cos_theta - sqrt(pow(ball.radius, 2) - pow(perp_dist, 2));
+    const float hit_pos_dist = d_mag * cos_theta - (float)sqrt(pow(ball.radius, 2) - pow(perp_dist, 2));
     vec3 hit_position = vec3_scalar_product(direction, hit_pos_dist);
 
     vec3 normal = vec3_difference(hit_position, ball.position);
     vec3 hit_pos_to_sun = vec3_difference(sun, hit_position);
 
     float diffusion = vec3_dot_vec3(normal, hit_pos_to_sun) / (vec3_magnitude(normal) * vec3_magnitude(hit_pos_to_sun));
-    float distance_squared = pow(vec3_magnitude(hit_pos_to_sun), 2);
-    float intensity = LIGHT_INTENSITY / (4.0 * M_PI * distance_squared);
+    float distance_squared = (float)pow(vec3_magnitude(hit_pos_to_sun), 2);
+    float intensity = (float)LIGHT_INTENSITY / (4.0 * M_PI * distance_squared);
     // diffusion = fmax(0.0, fmin(1.0, diffusion));
 
     pixel.red = validate_rgb((int) ( ((float)(ball.color.red)) *  diffusion * intensity * 0.675 ) );

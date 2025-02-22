@@ -1,5 +1,6 @@
 #include <stdint.h>
 
+#pragma pack(push, 1)
 typedef struct {
     uint16_t signature;     // File signature "BM" (0x4D42)
     uint32_t fileSize;      // Size of the BMP file
@@ -17,15 +18,16 @@ typedef struct {
     int32_t yPixelsPerMeter;// Vertical pixels per meter
     uint32_t colorsUsed;    // Number of colors used in the bitmap
     uint32_t colorsImportant; // Number of important colors
-} __attribute__((__packed__))
-BMPHeader;
+} BMPHeader;
+#pragma pack(pop)
 
+#pragma pack(push, 1)
 typedef struct
 {
     uint8_t  blue;
     uint8_t  green;
     uint8_t  red;
-} __attribute__((__packed__))
-RGB;
+} RGB;
+#pragma pack(pop)
 
 int write_bmp(const char *filename, const int width, const int height, RGB *pixels);

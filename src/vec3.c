@@ -18,7 +18,7 @@ vec3 vec3_new(float x, float y, float z) {
 }
 
 float vec3_magnitude(vec3 v) {
-    float mag = sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+    float mag = (float)sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
     return mag;
 }
 
