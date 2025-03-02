@@ -7,7 +7,7 @@
 #include "bmp.h"
 #include "config.h"
 #include "data_types.h"
-#include "sphere.h"
+#include "raycast.h"
 #include "vec3.h"
 
 void render_scene(vec3 origin, vec3 sun, int num_objects, BasePart *objects, int HEIGHT, int WIDTH, RGB *pixels);

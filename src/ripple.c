@@ -11,6 +11,10 @@
 #include "sphere.h"
 #include "vec3.h"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 int main(int argc, char **argv) {
     int STATUS = 0;
 
@@ -23,34 +27,52 @@ int main(int argc, char **argv) {
     const int WIDTH = atoi(argv[1]);
     const int HEIGHT = atoi(argv[2]);
 
-    const int num_objects = 3;
+    const int num_objects = 5;
     BasePart *objects = malloc(num_objects * sizeof(BasePart));
 
     RGB color;
-    color.red = 112;
-    color.green = 1;
-    color.blue = 185;
+    color.red = 200;
+    color.green = 30;
+    color.blue = 30;
 
     objects[0].DataType = DATA_TYPE_SPHERE;
-    objects[0].sphere = sphere_new(vec3_new(0.0,0.0,20.0), 4.0, color);
+    objects[0].sphere = sphere_new(vec3_new(0.0,0.0,6.0), 1.0, color);
 
-    color.red = 1;
-    color.green = 112;
-    color.blue = 185;
+    color.red = 100;
+    color.green = 100;
+    color.blue = 100;
 
     objects[1].DataType = DATA_TYPE_SPHERE;
-    objects[1].sphere = sphere_new(vec3_new(3.0,0.0,12.0), 1.0, color);
+    objects[1].sphere = sphere_new(vec3_new(-2.0,-0.4,6.0), 0.6, color);
+
+    color.red = 100;
+    color.green = 220;
+    color.blue = 255;
+
+    objects[2].DataType = DATA_TYPE_SPHERE;
+    objects[2].sphere = sphere_new(vec3_new(2.0,-1.0,7.0), 0.8, color);
 
     color.red = 146;
     color.green = 112;
-    color.blue = 185;
+    color.blue = 45;
 
-    objects[2].DataType = DATA_TYPE_SPHERE;
-    objects[2].sphere = sphere_new(vec3_new(-15.0,-2.0,20.0), 10.0, color);
+    objects[3].DataType = DATA_TYPE_CUBE;
+    objects[3].cube = cube_new(vec3_new(2.0,0.0,2.0), vec3_new(1.0, 1.0, 1.0), vec3_new(-1.0, -1.0, -1.0), color);
+
+    color.red = 56;
+    color.green = 112;
+    color.blue = 45;
+
+    objects[4].DataType = DATA_TYPE_PLANE;
+    objects[4].plane = plane_new(vec3_new(0.0,1.0,0.0), vec3_new(0.0, -2.0, 0.0), color);
 
     for (int i = 0; i < num_objects; i++) {
         if (objects[i].DataType == DATA_TYPE_SPHERE) {
             sphere_print(objects[i].sphere);
+        } else if (objects[i].DataType == DATA_TYPE_CUBE) {
+            cube_print(objects[i].cube);
+        } else if (objects[i].DataType == DATA_TYPE_PLANE) {
+            plane_print(objects[i].plane);
         }
     }
 
@@ -58,7 +80,7 @@ int main(int argc, char **argv) {
     clock_t start_time = clock();
 
     vec3 origin = vec3_new(0.0,0.0,0.0);
-    vec3 sun_pos = vec3_new(10.0, 0.0, 0.0);
+    vec3 sun_pos = vec3_new(5.0, 10.0, -4.0);
 
     printf("Sun position: ");
     vec3_print(sun_pos);
