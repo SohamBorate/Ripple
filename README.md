@@ -24,22 +24,61 @@ Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 ripple.c
-src\sphere.h(8): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
-src\ripple.c(12) : warning C4710: 'printf': function not inlined
-src\ripple.c(56) : warning C4710: 'printf': function not inlined
-src\ripple.c(59) : warning C4710: 'printf': function not inlined
-src\ripple.c(68) : warning C4710: 'printf': function not inlined
-src\ripple.c(73) : warning C4710: 'printf': function not inlined
-src\ripple.c(74) : warning C4710: 'printf': function not inlined
-src\ripple.c(75) : warning C4710: 'printf': function not inlined
+src\sphere.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\plane.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\cube.h(30): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\base_part.h(15): warning C4201: nonstandard extension used: nameless struct/union
+src\raycast.h(14): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src/ripple.c(39): warning C4305: 'function': truncation from 'double' to 'float'
+src/ripple.c(68): warning C4020: 'plane_new': too many actual parameters
+src\ripple.c(22) : warning C4710: 'printf': function not inlined
+src\ripple.c(86) : warning C4710: 'printf': function not inlined
 src\ripple.c(89) : warning C4710: 'printf': function not inlined
+src\ripple.c(98) : warning C4710: 'printf': function not inlined
+src\ripple.c(103) : warning C4710: 'printf': function not inlined
+src\ripple.c(104) : warning C4710: 'printf': function not inlined
+src\ripple.c(105) : warning C4710: 'printf': function not inlined
+src\ripple.c(120) : warning C4710: 'printf': function not inlined
 cl /O2 /Wall /c src/sphere.c /Fobuild/sphere.obj
 Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 sphere.c
-src\sphere.h(8): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\sphere.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
 src\sphere.c(6) : warning C4710: 'printf': function not inlined
+cl /O2 /Wall /c src/cube.c /Fobuild/cube.obj
+Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+cube.c
+src\plane.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\cube.h(30): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src/cube.c(40): warning C4020: 'plane_new': too many actual parameters
+src/cube.c(45): warning C4020: 'plane_new': too many actual parameters
+src/cube.c(50): warning C4020: 'plane_new': too many actual parameters
+src/cube.c(56): warning C4020: 'plane_new': too many actual parameters
+src/cube.c(61): warning C4020: 'plane_new': too many actual parameters
+src/cube.c(66): warning C4020: 'plane_new': too many actual parameters
+src\cube.c(7) : warning C4710: 'printf': function not inlined
+src\cube.c(8) : warning C4710: 'printf': function not inlined
+src\cube.c(9) : warning C4710: 'printf': function not inlined
+src\cube.c(10) : warning C4710: 'printf': function not inlined
+src\cube.c(11) : warning C4710: 'printf': function not inlined
+src\cube.c(12) : warning C4710: 'printf': function not inlined
+src\cube.c(14) : warning C4710: 'printf': function not inlined
+src\cube.c(15) : warning C4710: 'printf': function not inlined
+src\cube.c(16) : warning C4710: 'printf': function not inlined
+src\cube.c(17) : warning C4710: 'printf': function not inlined
+src\cube.c(18) : warning C4710: 'printf': function not inlined
+src\cube.c(19) : warning C4710: 'printf': function not inlined
+cl /O2 /Wall /c src/plane.c /Fobuild/plane.obj
+Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+plane.c
+src\plane.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src/plane.c(4): warning C4013: 'printf' undefined; assuming extern returning int
+src/plane.c(11): warning C4029: declared formal parameter list different from definition
 cl /O2 /Wall /c src/vec3.c /Fobuild/vec3.obj
 Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
 Copyright (C) Microsoft Corporation.  All rights reserved.
@@ -59,24 +98,49 @@ Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 render.c
-src\sphere.h(8): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
-src/render.c(36): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
-src/render.c(37): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
-src/render.c(71): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-src/render.c(87): warning C4242: 'return': conversion from 'int' to 'uint8_t', possible loss of data
-src\render.c(74) : warning C4711: function 'validate_rgb' selected for automatic inline expansion
-src\render.c(75) : warning C4711: function 'validate_rgb' selected for automatic inline expansion
-src\render.c(76) : warning C4711: function 'validate_rgb' selected for automatic inline expansion
-src\render.c(64) : warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-src\render.c(52) : note: index 'perp_dist' range checked by comparison on this line
-src\render.c(64) : note: feeds call on this line
-src\render.c(15) : warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-src\render.c(13) : note: index 'HEIGHT' range checked by comparison on this line
-src\render.c(15) : note: feeds call on this line
-src\render.c(15) : warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
-src\render.c(14) : note: index 'WIDTH' range checked by comparison on this line
-src\render.c(15) : note: feeds call on this line
-cl /O2 /Wall build/bmp.obj build/ripple.obj build/sphere.obj build/vec3.obj build/render.obj /Febuild/ripple.exe
+src\sphere.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\plane.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\cube.h(30): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\base_part.h(15): warning C4201: nonstandard extension used: nameless struct/union
+src\raycast.h(14): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src/render.c(13): warning C4305: 'initializing': truncation from 'double' to 'const float'
+src/render.c(16): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+src/render.c(17): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
+src/render.c(38): warning C4244: '=': conversion from 'double' to 'uint8_t', possible loss of data
+src/render.c(39): warning C4244: '=': conversion from 'double' to 'uint8_t', possible loss of data
+src/render.c(40): warning C4244: '=': conversion from 'double' to 'uint8_t', possible loss of data
+src/render.c(43): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+src/render.c(44): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+src/render.c(81): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+src/render.c(106): warning C4242: 'return': conversion from 'int' to 'uint8_t', possible loss of data
+src\render.c(85) : warning C4711: function 'validate_rgb' selected for automatic inline expansion
+src\render.c(86) : warning C4711: function 'validate_rgb' selected for automatic inline expansion
+src\render.c(87) : warning C4711: function 'validate_rgb' selected for automatic inline expansion
+src\render.c(22) : warning C4710: 'printf': function not inlined
+src\render.c(23) : warning C4710: 'printf': function not inlined
+src\render.c(24) : warning C4710: 'printf': function not inlined
+src\render.c(28) : warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+src\render.c(27) : note: index 'WIDTH' range checked by comparison on this line
+src\render.c(28) : note: feeds call on this line
+cl /O2 /Wall /c src/raycast.c /Fobuild/raycast.obj
+Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+raycast.c
+src\sphere.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\plane.h(11): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\cube.h(30): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src\base_part.h(15): warning C4201: nonstandard extension used: nameless struct/union
+src\raycast.h(14): warning C4820: '<unnamed-tag>': '1' bytes padding added after data member 'color'
+src/raycast.c(57): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+src\raycast.c(27) : warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+src\raycast.c(19) : note: index 'perp_distance' range checked by comparison on this line
+src\raycast.c(27) : note: feeds call on this line
+src\raycast.c(68) : warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified
+src\raycast.c(60) : note: index 'perp_distance' range checked by comparison on this line
+src\raycast.c(68) : note: feeds call on this line
+src\raycast.c(190) : warning C4711: function 'sphere_raycast' selected for automatic inline expansion
+cl /O2 /Wall build/bmp.obj build/ripple.obj build/sphere.obj build/cube.obj build/plane.obj build/vec3.obj build/render.obj build/raycast.obj /Febuild/ripple.exe
 Microsoft (R) C/C++ Optimizing Compiler Version 19.38.33133 for x64
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
@@ -87,8 +151,11 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
 build/bmp.obj
 build/ripple.obj
 build/sphere.obj
+build/cube.obj
+build/plane.obj
 build/vec3.obj
 build/render.obj
+build/raycast.obj
 
 ```
 
