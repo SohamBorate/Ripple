@@ -27,7 +27,7 @@ int main(int argc, char **argv) {
     const int WIDTH = atoi(argv[1]);
     const int HEIGHT = atoi(argv[2]);
 
-    const int num_objects = 5;
+    const int num_objects = 3;
     BasePart *objects = malloc(num_objects * sizeof(BasePart));
 
     RGB color;
@@ -36,35 +36,36 @@ int main(int argc, char **argv) {
     color.blue = 30;
 
     objects[0].DataType = DATA_TYPE_SPHERE;
-    objects[0].sphere = sphere_new(vec3_new(0.0,0.0,6.0), 1.0, color);
+    objects[0].sphere = sphere_new(vec3_new(-1.0,-0.5,6.0), 0.8, color);
 
-    color.red = 100;
-    color.green = 100;
-    color.blue = 100;
+    // color.red = 100;
+    // color.green = 100;
+    // color.blue = 100;
 
-    objects[1].DataType = DATA_TYPE_SPHERE;
-    objects[1].sphere = sphere_new(vec3_new(-2.0,-0.4,6.0), 0.6, color);
+    // objects[1].DataType = DATA_TYPE_SPHERE;
+    // objects[1].sphere = sphere_new(vec3_new(-2.0,-0.4,6.0), 0.01, color);
 
-    color.red = 100;
-    color.green = 220;
-    color.blue = 255;
+    // color.red = 100;
+    // color.green = 220;
+    // color.blue = 255;
 
-    objects[2].DataType = DATA_TYPE_SPHERE;
-    objects[2].sphere = sphere_new(vec3_new(2.0,-1.0,7.0), 0.8, color);
+    // objects[2].DataType = DATA_TYPE_SPHERE;
+    // objects[2].sphere = sphere_new(vec3_new(2.0,-1.0,7.0), 0.8, color);
 
     color.red = 146;
     color.green = 112;
     color.blue = 45;
 
-    objects[3].DataType = DATA_TYPE_CUBE;
-    objects[3].cube = cube_new(vec3_new(2.0,0.0,2.0), vec3_new(1.0, 1.0, 1.0), vec3_new(-1.0, -1.0, -1.0), color);
+    objects[1].DataType = DATA_TYPE_CUBE;
+    // objects[0].cube = cube_new(vec3_new(-4.0,-1.2,10.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
+    objects[1].cube = cube_new(vec3_new(2.0,-1.0,5.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
 
     color.red = 56;
     color.green = 112;
     color.blue = 45;
 
-    objects[4].DataType = DATA_TYPE_PLANE;
-    objects[4].plane = plane_new(vec3_new(0.0,1.0,0.0), vec3_new(0.0, -2.0, 0.0), color);
+    objects[2].DataType = DATA_TYPE_PLANE;
+    objects[2].plane = plane_new(vec3_new(0.0,1.0,0.0), vec3_new(0.0, -2.0, 0.0), color);
 
     for (int i = 0; i < num_objects; i++) {
         if (objects[i].DataType == DATA_TYPE_SPHERE) {
@@ -80,7 +81,7 @@ int main(int argc, char **argv) {
     clock_t start_time = clock();
 
     vec3 origin = vec3_new(0.0,0.0,0.0);
-    vec3 sun_pos = vec3_new(5.0, 10.0, -4.0);
+    vec3 sun_pos = vec3_new(0.0,10.0,0.0);
 
     printf("Sun position: ");
     vec3_print(sun_pos);

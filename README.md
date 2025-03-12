@@ -99,38 +99,58 @@ Run the program specifying the width and height.
 ```
 > build\ripple.exe 3840 2160
 Sphere:
-        Memory Address: 0000002F260FFAE0
-        Position: (0.000000 0.000000 20.000000)
-        Radius: 4.000000
-        Color: RGB (112, 1, 185)
-Sphere:
-        Memory Address: 0000002F260FFAE0
-        Position: (3.000000 0.000000 12.000000)
-        Radius: 1.000000
-        Color: RGB (1, 112, 185)
-Sphere:
-        Memory Address: 0000002F260FFAE0
-        Position: (-15.000000 -2.000000 20.000000)
-        Radius: 10.000000
-        Color: RGB (146, 112, 185)
+        Memory Address: 000000056DB1FBF0
+        Position: (-1.000000 -0.500000 6.000000)
+        Radius: 0.800000
+        Color: RGB (200, 30, 30)
+Cube:
+        Memory address: 000000056DB1FB20
+        Position: (2.000000 -1.000000 5.000000)
+        Vertex 1 (front top left) (relative to position): (0.500000 0.500000 0.500000)
+        Vertex 2 (back bottom right) (relative to position): (-0.500000 -0.500000 -0.500000)
+        Color: (146, 112, 45)
+        Surfaces:
+                Front:
+                        Normal: (0.000000 0.000000 1.000000)
+                        Point: (2.500000 -0.500000 5.500000)
+                Back:
+                        Normal: (0.000000 0.000000 -1.000000)
+                        Point: (1.500000 -1.500000 4.500000)
+                Top:
+                        Normal: (0.000000 1.000000 0.000000)
+                        Point: (2.500000 -0.500000 5.500000)
+                Bottom:
+                        Normal: (0.000000 -1.000000 0.000000)
+                        Point: (1.500000 -1.500000 4.500000)
+                Right:
+                        Normal: (-1.000000 0.000000 0.000000)
+                        Point: (1.500000 -1.500000 4.500000)
+                Left:
+                        Normal: (1.000000 0.000000 0.000000)
+                        Point: (2.500000 -0.500000 5.500000)
+Plane:
+        Memory Address: 000000056DB1FBE0
+        Normal: (0.000000 1.000000 0.000000)
+        Point: (0.000000 -2.000000 0.000000)
+        Color: (56, 112, 45)
 Sun position: Vector3:
-        Memory Address: 0000002F260FFB50
-        Value: (10.000000 0.000000 0.000000)
+        Memory Address: 000000056DB1FC60
+        Value: (0.000000 10.000000 0.000000)
         Magnitude: 10.000000
 
 Width: 3840, Height: 2160
-Light Intensity: 6000
-Field Of View: 70
+Light Intensity: 5000
+Field Of View: 90
 Shading Enabled: 1
 
 Aspect Ratio: 1.777778
-Horizontal Field Of View in radians: 1.221730
-Vertical Field Of View in radians: 0.687223
-Scene Width: 1.400415 Scene Height: 0.715611
-Least Scene Width: 0.000365 Least Scene Height: 0.000331
+Horizontal Field Of View in radians: 1.570796
+Vertical Field Of View in radians: 0.883573
+Scene Width: 2.000000 Scene Height: 0.945930
+Least Scene Width: 0.000521 Least Scene Height: 0.000438
 
 
-Render time: 4.070000 seconds
+Render time: 5.570000 seconds
 
 ```
 

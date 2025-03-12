@@ -29,15 +29,41 @@ cube cube_new(vec3 position, vec3 vertex_1, vec3 vertex_2, RGB color) {
     vec3 world_vertex_1 = vec3_sum(position, vertex_1);
     vec3 world_vertex_2 = vec3_sum(position, vertex_2);
 
+    c.world_vertex_1 = world_vertex_1;
+    c.world_vertex_2 = world_vertex_2;
+
     // surfaces connected to vertex 1 (front top left)
-    c.surfaces.front = plane_new(vec3_new(0.0, 0.0, 1.0), world_vertex_1);
-    c.surfaces.top = plane_new(vec3_new(0.0, 1.0, 0.0), world_vertex_1);
-    c.surfaces.left = plane_new(vec3_new(1.0, 0.0, 0.0), world_vertex_1);
+    // RGB color2;
+    // color2.red = 200;
+    // color2.green = 1;
+    // color2.blue = 1;
+    c.surfaces.front = plane_new(vec3_new(0.0, 0.0, 1.0), world_vertex_1, color);
+
+    // color2.red = 1;
+    // color2.green = 200;
+    // color2.blue = 1;
+    c.surfaces.top = plane_new(vec3_new(0.0, 1.0, 0.0), world_vertex_1, color);
+
+    // color2.red = 1;
+    // color2.green = 1;
+    // color2.blue = 200;
+    c.surfaces.left = plane_new(vec3_new(1.0, 0.0, 0.0), world_vertex_1, color);
     
     // surfaces connected to vertex 2 (back bottom right)
-    c.surfaces.back = plane_new(vec3_new(0.0, 0.0, -1.0), world_vertex_2);
-    c.surfaces.bottom = plane_new(vec3_new(0.0, -1.0, 0.0), world_vertex_2);
-    c.surfaces.right = plane_new(vec3_new(-1.0, 0.0, 0.0), world_vertex_2);
+    // color2.red = 200;
+    // color2.green = 200;
+    // color2.blue = 1;
+    c.surfaces.back = plane_new(vec3_new(0.0, 0.0, -1.0), world_vertex_2, color);
+
+    // color2.red = 1;
+    // color2.green = 200;
+    // color2.blue = 200;
+    c.surfaces.bottom = plane_new(vec3_new(0.0, -1.0, 0.0), world_vertex_2, color);
+
+    // color2.red = 200;
+    // color2.green = 1;
+    // color2.blue = 200;
+    c.surfaces.right = plane_new(vec3_new(-1.0, 0.0, 0.0), world_vertex_2, color);
 
     return c;
 }

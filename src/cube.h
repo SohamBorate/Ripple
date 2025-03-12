@@ -21,6 +21,9 @@ typedef struct {
     vec3 vertex_1; // front top left, relative to position, not origin
     vec3 vertex_2; // back bottom right, relative to position, not origin
 
+    vec3 world_vertex_1; // front top left, relative to origin, not position
+    vec3 world_vertex_2; // back bottom right, relative to origin, not position
+
     cube_surfaces surfaces; // normal vectors of all the surfaces
 
     RGB color;

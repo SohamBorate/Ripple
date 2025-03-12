@@ -76,7 +76,7 @@ RGB render_pixel(vec3 origin, vec3 sun, int num_objects, BasePart *objects, cons
         }
     }
 
-    float diffusion = vec3_dot_vec3(vec3_unit(raycast1.hit_normal), vec3_unit(hit_pos_to_sun));
+    float diffusion = vec3_dot_vec3(raycast1.hit_normal, vec3_unit(hit_pos_to_sun));
     float distance_squared = (float)pow(vec3_magnitude(hit_pos_to_sun), 2);
     float intensity = (float)LIGHT_INTENSITY / (4.0 * M_PI * distance_squared);
     // float intensity = 1;
@@ -86,9 +86,9 @@ RGB render_pixel(vec3 origin, vec3 sun, int num_objects, BasePart *objects, cons
     pixel.green = validate_rgb((int) ( ((float)(raycast1.color.green)) * diffusion * intensity * 0.525 ) );
     pixel.blue = validate_rgb((int) ( ((float)(raycast1.color.blue)) * diffusion * intensity * 0.475 ) );
 
-    // pixel.red = validate_rgb((int) ( ((float)(raycast1.color.red)) *  diffusion * intensity * 1 ) );
-    // pixel.green = validate_rgb((int) ( ((float)(raycast1.color.green)) * diffusion * intensity * 1 ) );
-    // pixel.blue = validate_rgb((int) ( ((float)(raycast1.color.blue)) * diffusion * intensity * 1 ) );
+    // pixel.red = validate_rgb((int) ( ((float)(raycast1.color.red)) *  diffusion * intensity ) );
+    // pixel.green = validate_rgb((int) ( ((float)(raycast1.color.green)) * diffusion * intensity ) );
+    // pixel.blue = validate_rgb((int) ( ((float)(raycast1.color.blue)) * diffusion * intensity ) );
 
     // pixel.red = raycast1.color.red;
     // pixel.green = raycast1.color.green;
