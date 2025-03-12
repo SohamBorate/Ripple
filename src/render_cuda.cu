@@ -34,7 +34,7 @@ extern "C" void render_scene_CUDA(vec3 origin_cpu, vec3 sun_cpu, int num_objects
     const float LEAST_WIDTH = SCENE_WIDTH / (float) WIDTH;
     const float LEAST_HEIGHT = SCENE_HEIGHT / (float) HEIGHT;
 
-    printf("\nReporting from the GPU\n\n");
+    // printf("\nReporting from the GPU\n\n");
 
     // 256 threads per block
     dim3 threadsPerBlock(16, 16);
@@ -42,6 +42,11 @@ extern "C" void render_scene_CUDA(vec3 origin_cpu, vec3 sun_cpu, int num_objects
 
     render_kernel<<<numBlocks, threadsPerBlock>>>(origin_gpu, sun_gpu, num_objects, objects_gpu, HEIGHT, WIDTH, SCENE_HEIGHT, SCENE_WIDTH, LEAST_HEIGHT, LEAST_WIDTH, pixels_gpu);
     
+    cudaError_t err = cudaGetLastError();
+    if (err != cudaSuccess) {
+        printf("CUDA error: %s\n", cudaGetErrorString(err));
+    }
+
     cudaDeviceSynchronize();
 
     cudaMemcpy(pixels_cpu, pixels_gpu, HEIGHT * WIDTH * sizeof(RGB), cudaMemcpyDeviceToHost);

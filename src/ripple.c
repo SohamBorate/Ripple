@@ -15,6 +15,11 @@
 #define M_PI 3.14159265358979323846
 #endif
 
+#define SPEED M_PI / 2.0
+#define FPS 120
+#define DELTA_TIME 1.0 / (float) FPS
+#define LENGTH 10
+
 extern void render_scene_CUDA(vec3 origin, vec3 sun, int num_objects, BasePart *objects, int HEIGHT, int WIDTH, RGB *pixels);
 
 int main(int argc, char **argv) {
@@ -106,10 +111,32 @@ int main(int argc, char **argv) {
     printf("Field Of View: %i\n", FIELD_OF_VIEW);
     printf("Shading Enabled: %i\n", SHADING_ENABLED);
 
-    render_scene_CUDA(origin, sun_pos, num_objects, objects, HEIGHT, WIDTH, pixels);
+    float theta = 0;
 
-    // Write to BMP file
-    STATUS = write_bmp("output.bmp", WIDTH, HEIGHT, pixels);
+    // ffmpeg -framerate 30 -i C:\Users\soham\Documents\Programming\Ripple\frames\output_%04d.bmp -c:v libx264 -crf 0 -preset veryslow -pix_fmt yuv444p output.mp4
+
+    for (int i = 0; i < FPS * LENGTH; i++) {
+
+        sun_pos.x = 5.0 * sin(theta);
+        sun_pos.z = 5.5 - cos(theta) * 5.5;
+
+        render_scene_CUDA(origin, sun_pos, num_objects, objects, HEIGHT, WIDTH, pixels);
+
+        char file_name[100];
+        sprintf(&file_name, "C:\\Users\\soham\\Documents\\Programming\\Ripple\\frames\\output_%04d.bmp", i);
+
+        // Write to BMP file
+        STATUS = write_bmp(file_name, WIDTH, HEIGHT, pixels);
+
+        if ((i + 1) % FPS == 0) {
+            printf("%i/%i frames rendered\n", i + 1, FPS * LENGTH);
+        }
+
+        theta += SPEED * DELTA_TIME;
+        if (theta >= 2 * M_PI) {
+            theta -= 2 * M_PI;
+        }
+    }
 
     // clean up
     free(objects);
