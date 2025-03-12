@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
 
     float theta = 0;
 
-    // ffmpeg -framerate 30 -i C:\Users\soham\Documents\Programming\Ripple\frames\output_%04d.bmp -c:v libx264 -crf 0 -preset veryslow -pix_fmt yuv444p output.mp4
+    // ffmpeg -framerate 120 -i C:\Users\soham\Documents\Programming\Ripple\frames\output_%04d.bmp -c:v libx264 -crf 0 -preset veryslow -pix_fmt yuv444p output.mp4
 
     for (int i = 0; i < FPS * LENGTH; i++) {
 
