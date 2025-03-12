@@ -3,10 +3,19 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "base_part.h"
+#include "bmp.h"
 #include "config.h"
+#include "data_types.h"
+#include "render.h"
 #include "sphere.h"
+#include "vec3.h"
 
-extern void render_scene_CUDA(vec3 origin, vec3 sun, sphere ball, int HEIGHT, int WIDTH, RGB *pixels);
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+extern void render_scene_CUDA(vec3 origin, vec3 sun, int num_objects, BasePart *objects, int HEIGHT, int WIDTH, RGB *pixels);
 
 int main(int argc, char **argv) {
     int STATUS = 0;
@@ -20,51 +29,72 @@ int main(int argc, char **argv) {
     const int WIDTH = atoi(argv[1]);
     const int HEIGHT = atoi(argv[2]);
 
-    vec3 ball_pos = vec3_new(0.0,0.0,10.0);
-    // if (ball_pos == NULL) {
-    //     STATUS = 3;
-    //     return STATUS;
-    // }
+    const int num_objects = 3;
+    BasePart *objects = malloc(num_objects * sizeof(BasePart));
 
     RGB color;
-    color.red = 112;
-    color.green = 1;
-    color.blue = 185;
-    sphere ball = sphere_new(ball_pos, 4.0, color);
-    // if (ball == NULL) {
-    //     STATUS = 4;
-    //     vec3_free(ball_pos);
-    //     return STATUS;
-    // }
+    color.red = 200;
+    color.green = 30;
+    color.blue = 30;
 
-    sphere_print(ball);
+    objects[0].DataType = DATA_TYPE_SPHERE;
+    objects[0].sphere = sphere_new(vec3_new(-1.0,-0.5,6.0), 0.8, color);
+
+    // color.red = 100;
+    // color.green = 100;
+    // color.blue = 100;
+
+    // objects[1].DataType = DATA_TYPE_SPHERE;
+    // objects[1].sphere = sphere_new(vec3_new(-2.0,-0.4,6.0), 0.01, color);
+
+    // color.red = 100;
+    // color.green = 220;
+    // color.blue = 255;
+
+    // objects[2].DataType = DATA_TYPE_SPHERE;
+    // objects[2].sphere = sphere_new(vec3_new(2.0,-1.0,7.0), 0.8, color);
+
+    color.red = 146;
+    color.green = 112;
+    color.blue = 45;
+
+    objects[1].DataType = DATA_TYPE_CUBE;
+    // objects[0].cube = cube_new(vec3_new(-4.0,-1.2,10.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
+    objects[1].cube = cube_new(vec3_new(2.0,-1.0,5.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
+
+    color.red = 56;
+    color.green = 112;
+    color.blue = 45;
+
+    objects[2].DataType = DATA_TYPE_PLANE;
+    objects[2].plane = plane_new(vec3_new(0.0,1.0,0.0), vec3_new(0.0, -2.0, 0.0), color);
+
+    for (int i = 0; i < num_objects; i++) {
+        if (objects[i].DataType == DATA_TYPE_SPHERE) {
+            sphere_print(objects[i].sphere);
+        } else if (objects[i].DataType == DATA_TYPE_CUBE) {
+            cube_print(objects[i].cube);
+        } else if (objects[i].DataType == DATA_TYPE_PLANE) {
+            plane_print(objects[i].plane);
+        }
+    }
 
     // total time taken
     clock_t start_time = clock();
 
     vec3 origin = vec3_new(0.0,0.0,0.0);
-    // if (origin == NULL) {
-    //     sphere_free(ball);
-    //     STATUS = 5;
-    //     return STATUS;
-    // }
+    vec3 sun_pos = vec3_new(0.0,10.0,0.0);
 
-    vec3 sun_pos = vec3_new(0.0, 10.0,0.0);
-    // if (origin == NULL) {
-    //     sphere_free(ball);
-    //     vec3_free(origin);
-    //     STATUS = 6;
-    //     return STATUS;
-    // }
     printf("Sun position: ");
     vec3_print(sun_pos);
 
     printf("\nWidth: %i, Height: %i\n", WIDTH, HEIGHT);
 
-    // dynamic memory allocation for 2D array
+    // dynamic memory allocation for 1D array
     RGB *pixels = malloc(HEIGHT * WIDTH * sizeof(RGB));
     // IMPORTANT !!!
     // pixels[row + column]
+    // IMPORTANT !!!
 
     if (pixels == NULL) {
         printf("Memory allocation for Pixels failed\n");
@@ -74,14 +104,15 @@ int main(int argc, char **argv) {
 
     printf("Light Intensity: %i\n", LIGHT_INTENSITY);
     printf("Field Of View: %i\n", FIELD_OF_VIEW);
-    printf("Shading Enabled: %i\n", SHADE);
+    printf("Shading Enabled: %i\n", SHADING_ENABLED);
 
-    render_scene_CUDA(origin, sun_pos, ball, HEIGHT, WIDTH, pixels);
+    render_scene_CUDA(origin, sun_pos, num_objects, objects, HEIGHT, WIDTH, pixels);
 
     // Write to BMP file
     STATUS = write_bmp("output.bmp", WIDTH, HEIGHT, pixels);
 
     // clean up
+    free(objects);
     free(pixels);
 
     // render time

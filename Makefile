@@ -9,10 +9,10 @@ CFLAGS = /O2 /Wall
 NVFLAGS = -arch=sm_75 -gencode arch=compute_75,code=sm_75 -O2
 
 # Source files
-SOURCES_C = $(SRC_DIR)/bmp.c $(SRC_DIR)/ripple.c $(SRC_DIR)/sphere.c $(SRC_DIR)/vec3.c $(SRC_DIR)/render.c
-SOURCES_CU = $(SRC_DIR)/render_cuda.cu $(SRC_DIR)/sphere_cuda.cu $(SRC_DIR)/vec3_cuda.cu
-OBJECTS = $(BUILD_DIR)/bmp.obj $(BUILD_DIR)/ripple.obj $(BUILD_DIR)/sphere.obj $(BUILD_DIR)/vec3.obj $(BUILD_DIR)/render.obj \
-          $(BUILD_DIR)/render_cuda.obj $(BUILD_DIR)/sphere_cuda.obj $(BUILD_DIR)/vec3_cuda.obj $(BUILD_DIR)/cuda_link.obj
+SOURCES_C = $(SRC_DIR)/bmp.c $(SRC_DIR)/cube.c $(SRC_DIR)/plane.c $(SRC_DIR)/raycast.c $(SRC_DIR)/render.c $(SRC_DIR)/ripple.c $(SRC_DIR)/sphere.c $(SRC_DIR)/vec3.c
+SOURCES_CU = $(SRC_DIR)/cube_cuda.cu $(SRC_DIR)/plane_cuda.cu $(SRC_DIR)/raycast_cuda.cu $(SRC_DIR)/render_cuda.cu $(SRC_DIR)/sphere_cuda.cu $(SRC_DIR)/vec3_cuda.cu
+OBJECTS = $(BUILD_DIR)/bmp.obj $(BUILD_DIR)/cube.obj $(BUILD_DIR)/plane.obj $(BUILD_DIR)/raycast.obj $(BUILD_DIR)/render.obj $(BUILD_DIR)/ripple.obj $(BUILD_DIR)/sphere.obj $(BUILD_DIR)/vec3.obj \
+          $(BUILD_DIR)/cube_cuda.obj $(BUILD_DIR)/plane_cuda.obj $(BUILD_DIR)/raycast_cuda.obj $(BUILD_DIR)/render_cuda.obj $(BUILD_DIR)/sphere_cuda.obj $(BUILD_DIR)/vec3_cuda.obj $(BUILD_DIR)/cuda_link.obj
 
 # Output executable
 TARGET = $(BUILD_DIR)/ripple.exe
@@ -30,7 +30,7 @@ $(BUILD_DIR)/%.obj: $(SRC_DIR)/%.cu
 	$(NVCC) $(NVFLAGS) -dc -c $< -o $@
 
 # CUDA linking stage
-$(BUILD_DIR)/cuda_link.obj: $(BUILD_DIR)/render_cuda.obj $(BUILD_DIR)/sphere_cuda.obj $(BUILD_DIR)/vec3_cuda.obj
+$(BUILD_DIR)/cuda_link.obj: $(BUILD_DIR)/cube_cuda.obj $(BUILD_DIR)/plane_cuda.obj $(BUILD_DIR)/raycast_cuda.obj $(BUILD_DIR)/render_cuda.obj $(BUILD_DIR)/sphere_cuda.obj $(BUILD_DIR)/vec3_cuda.obj
 	$(NVCC) $(NVFLAGS) -dlink $^ -o $@
 
 # Clean build directory
