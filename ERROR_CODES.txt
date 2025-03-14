@@ -1,9 +1,0 @@
-0   Success
-1   Incorrect arguments
-[REMOVED]   2   Provided dimensions are not allowed
-[REMOVED]   3   Memory allocation for Vector3 for Sphere position failed
-[REMOVED]   4   Memory allocation for Sphere failed
-[REMOVED]   5   Memory allocation for Vector3 for Origin failed
-[REMOVED]   6   Memory allocation for Vector3 for Sun position failed
-7   Memory allocation for Pixels failed
-8   Memory allocation for Bitmap failed
