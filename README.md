@@ -1,7 +1,3 @@
-```
-Bug: Shadows casted by Cube do not get rendered
-```
-
 # Ripple
 
 Ripple is a raytracer made completely from scratch in the C programming language.
