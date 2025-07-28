@@ -24,7 +24,10 @@ CUDA_DEV RaycastResult sphere_raycast(vec3 origin, vec3 direction, int object_in
     const float hit_distance = d_mag * cos_theta - (float)sqrt(pow(ball.radius, 2) - pow(perp_distance, 2));
 
     result.BasePartIndex = object_index;
-    result.hit_position = vec3_scalar_product(direction, hit_distance);
+    result.hit_position = vec3_sum(origin,
+        vec3_scalar_product(direction, hit_distance)
+    );
+
     result.hit_distance = hit_distance;
     result.hit_normal = vec3_unit(vec3_difference(result.hit_position, ball.position));
     result.color = ball.color;
@@ -65,7 +68,10 @@ CUDA_DEV RaycastResult plane_raycast(vec3 origin, vec3 direction, int object_ind
     const float hit_distance = perp_distance / cos_theta;
 
     result.BasePartIndex = object_index;
-    result.hit_position = vec3_scalar_product(direction, hit_distance);
+    result.hit_position = vec3_sum(origin,
+        vec3_scalar_product(direction, hit_distance)
+    );
+
     result.hit_distance = hit_distance;
     result.hit_normal = vec3_unit(plane.normal);
     result.color = plane.color;
