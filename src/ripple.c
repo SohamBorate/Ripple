@@ -15,10 +15,10 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-#define SPEED M_PI / 2.0
 #define FPS 120
 #define DELTA_TIME 1.0 / (float) FPS
 #define LENGTH 10
+#define SPEED M_PI / ((float) LENGTH)
 
 extern void render_scene_CUDA(vec3 origin, vec3 sun, int num_objects, BasePart *objects, int HEIGHT, int WIDTH, RGB *pixels);
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
     color.blue = 30;
 
     objects[0].DataType = DATA_TYPE_SPHERE;
-    objects[0].sphere = sphere_new(vec3_new(-1.0,-0.5,6.0), 0.8, color);
+    objects[0].sphere = sphere_new(vec3_new(-1.0,-0.5,10.0), 0.8, color);
 
     // color.red = 100;
     // color.green = 100;
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
     objects[1].DataType = DATA_TYPE_CUBE;
     // objects[0].cube = cube_new(vec3_new(-4.0,-1.2,10.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
-    objects[1].cube = cube_new(vec3_new(2.0,-1.0,5.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
+    objects[1].cube = cube_new(vec3_new(2.0,-1.0,10.0), vec3_new(0.5, 0.5, 0.5), vec3_new(-0.5, -0.5, -0.5), color);
 
     color.red = 56;
     color.green = 112;
@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
     clock_t start_time = clock();
 
     vec3 origin = vec3_new(0.0,0.0,0.0);
-    vec3 sun_pos = vec3_new(0.0,10.0,0.0);
+    vec3 sun_pos = vec3_new(5.0,0.0,5.0);
 
     printf("Sun position: ");
     vec3_print(sun_pos);
@@ -114,11 +114,12 @@ int main(int argc, char **argv) {
     float theta = 0;
 
     // ffmpeg -framerate 120 -i C:\Users\soham\Documents\Programming\Ripple\frames\output_%04d.bmp -c:v libx264 -crf 0 -preset veryslow -pix_fmt yuv444p output.mp4
+    // ffmpeg -framerate 30 -i C:\Users\soham\Documents\Programming\Ripple\frames\output_%04d.bmp -c:v libx264 -crf 0 -preset veryslow -pix_fmt yuv444p output.mp4
 
     for (int i = 0; i < FPS * LENGTH; i++) {
-
-        sun_pos.x = 5.0 * sin(theta);
-        sun_pos.z = 5.5 - cos(theta) * 5.5;
+        sun_pos.x += -10.0 * (SPEED * DELTA_TIME / M_PI);
+        sun_pos.y = 10.0 + 5.0 * sin(theta);
+        sun_pos.z += 10.0 * (SPEED * DELTA_TIME / M_PI);
 
         render_scene_CUDA(origin, sun_pos, num_objects, objects, HEIGHT, WIDTH, pixels);
 
