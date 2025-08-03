@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "string_utils.h"
 #include "base_part.h"
 #include "bmp.h"
 #include "config.h"
@@ -18,14 +19,28 @@
 int main(int argc, char **argv) {
     int STATUS = 0;
 
-    if (argc != 3) {
-        printf("Usage: ripple [WIDTH] [HEIGHT]\n");
+    if (argc != 4) {
+        printf("Usage: ripple [SCENE FILE] [WIDTH] [HEIGHT]\n");
         STATUS = 1;
         return STATUS;
     }
 
-    const int WIDTH = atoi(argv[1]);
-    const int HEIGHT = atoi(argv[2]);
+    if (ends_with(argv[1], ".ripple") != 1) {
+        printf("Provided file is not a Ripple Scene!!\n");
+        return;
+    }
+
+    const FILE *SCENE_FILE =  fopen(argv[1], "r");
+    if (SCENE_FILE == NULL) {
+        printf("Provided Ripple Scene file does not exist!!\n");
+        return;
+    }
+
+    // destroy
+    return 0;
+
+    const int WIDTH = atoi(argv[2]);
+    const int HEIGHT = atoi(argv[3]);
 
     const int num_objects = 3;
     BasePart *objects = malloc(num_objects * sizeof(BasePart));
