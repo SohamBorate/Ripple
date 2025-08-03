@@ -3,7 +3,7 @@
 This branch is for using GPU acceleration with CUDA.
 
 ```
-Ripple v3.0.0
+Ripple v3.1.0
 ```
 
 ## Building
