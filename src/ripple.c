@@ -1,15 +1,17 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
-#include "string_utils.h"
 #include "base_part.h"
 #include "bmp.h"
 #include "config.h"
 #include "data_types.h"
+#include "file_parser.h"
 #include "render.h"
 #include "sphere.h"
+#include "string_utils.h"
 #include "vec3.h"
 
 #ifndef M_PI
@@ -35,9 +37,6 @@ int main(int argc, char **argv) {
         printf("Provided Ripple Scene file does not exist!!\n");
         return;
     }
-
-    // destroy
-    return 0;
 
     const int WIDTH = atoi(argv[2]);
     const int HEIGHT = atoi(argv[3]);
@@ -101,6 +100,11 @@ int main(int argc, char **argv) {
     printf("Sun position: ");
     vec3_print(sun_pos);
 
+    read_scene_file(SCENE_FILE, objects, &sun_pos);
+
+    // destroy
+    return 0;
+
     printf("\nWidth: %i, Height: %i\n", WIDTH, HEIGHT);
 
     // dynamic memory allocation for 1D array
@@ -125,6 +129,7 @@ int main(int argc, char **argv) {
     STATUS = write_bmp("output.bmp", WIDTH, HEIGHT, pixels);
 
     // clean up
+    fclose(SCENE_FILE);
     free(objects);
     free(pixels);
 
