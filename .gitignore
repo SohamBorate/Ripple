@@ -1,5 +1,7 @@
 *.exe
 *.bmp
+*.mp4
 .vscode
 .vs
+frames
 build
