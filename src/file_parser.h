@@ -10,8 +10,9 @@
 #include "data_types.h"
 #include "render.h"
 #include "sphere.h"
+#include "string_utils.h"
 #include "vec3.h"
 
-void read_scene_file(const FILE *SCENE_FILE, BasePart *OBJECTS, vec3 *SUN_POS);
+void read_scene_file(FILE *SCENE_FILE, BasePart *OBJECTS, vec3 *SUN_POS);
 
 #endif
